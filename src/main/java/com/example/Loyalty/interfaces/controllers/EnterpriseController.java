@@ -25,7 +25,7 @@ public class EnterpriseController {
 
 
     @PostMapping("/create")
-    Enterprise newEmployee(@RequestBody Enterprise newEnterprise) {
+    public Enterprise newEmployee(@RequestBody Enterprise newEnterprise) {
         System.out.println("newEnterprise = " + newEnterprise);
         try {
         return addEnterpriseUseCase.addEnterprise(newEnterprise);
