@@ -23,8 +23,8 @@ public class AddEnterpriseUseCase {
         String name = newEnterprise.getName();
         String email = newEnterprise.getEmail();
         String password = newEnterprise.getPassword();
-            PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
-            String hashedPassword = passwordEncoder.encode(password);
+//            PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+//            String hashedPassword = passwordEncoder.encode(password);
 
 
         if(name == null || email == null || password == null) {

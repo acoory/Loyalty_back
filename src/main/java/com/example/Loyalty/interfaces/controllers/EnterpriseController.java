@@ -5,15 +5,13 @@ import com.example.Loyalty.domain.repositories.EnterpriseRepository;
 import com.example.Loyalty.interfaces.exceptions.EnterpriseException;
 import com.example.Loyalty.usecases.AddEnterpriseUseCase;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.lang.reflect.Array;
 
 
 @RestController
+@RequestMapping("/enterprise")
 public class EnterpriseController {
 
     private final AddEnterpriseUseCase addEnterpriseUseCase;
@@ -28,7 +26,7 @@ public class EnterpriseController {
 
     @PostMapping("/create")
     Enterprise newEmployee(@RequestBody Enterprise newEnterprise) {
-
+        System.out.println("newEnterprise = " + newEnterprise);
         try {
         return addEnterpriseUseCase.addEnterprise(newEnterprise);
         } catch (Exception e) {
@@ -36,4 +34,9 @@ public class EnterpriseController {
         }
     }
 
+    @GetMapping("/all")
+    public Iterable<Enterprise> getAllEnterprises() {
+        System.out.println("getAllEnterprises");
+        return null;
+    }
 }
