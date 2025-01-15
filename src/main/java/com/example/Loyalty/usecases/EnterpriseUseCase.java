@@ -8,13 +8,13 @@ import org.springframework.stereotype.Service;
 import com.example.Loyalty.config.SecurityConfig;
 
 @Service
-public class AddEnterpriseUseCase {
+public class EnterpriseUseCase {
 
     private final EnterpriseRepository enterpriseRepository;
 
 
     @Autowired
-    public AddEnterpriseUseCase(EnterpriseRepository enterpriseRepository) {
+    public EnterpriseUseCase(EnterpriseRepository enterpriseRepository) {
         this.enterpriseRepository = enterpriseRepository;
     }
 
@@ -36,5 +36,9 @@ public class AddEnterpriseUseCase {
             throw new EnterpriseException("error : " + e.getMessage());
         }
 
+    }
+
+    public Iterable<Enterprise> getAllEnterprises() {
+        return enterpriseRepository.findAll();
     }
 }

@@ -8,4 +8,5 @@ public interface EnterpriseRepository {
     Optional<Enterprise> findById(String id);
     List<Enterprise> findAll();
     void deleteById(String id);
+
 }
