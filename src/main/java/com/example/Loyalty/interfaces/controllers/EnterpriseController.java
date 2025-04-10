@@ -5,7 +5,6 @@ import com.example.Loyalty.interfaces.exceptions.EnterpriseException;
 import com.example.Loyalty.usecases.EnterpriseUseCase;
 import org.springframework.web.bind.annotation.*;
 
-
 @RestController
 @RequestMapping("/enterprise")
 public class EnterpriseController {

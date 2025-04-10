@@ -20,13 +20,15 @@ public class LoyaltyUseCase {
     private final LoyaltyRepository loyaltyRepository;
     private final SecurityConfig securityConfig;
     private final ClientRepository clientRepository;
+    private final AdminRepository adminRepository;
 
 
     @Autowired
-    public LoyaltyUseCase(LoyaltyRepository loyaltyRepository, SecurityConfig securityConfig, ClientRepository clientRepository) {
+    public LoyaltyUseCase(LoyaltyRepository loyaltyRepository, SecurityConfig securityConfig, ClientRepository clientRepository, AdminRepository adminRepository) {
         this.loyaltyRepository = loyaltyRepository;
         this.securityConfig = securityConfig;
         this.clientRepository = clientRepository;
+        this.adminRepository = adminRepository;
     }
 
     public LoyaltyCard isLoyaltyExist(Enterprise enterprise, Client client) {
@@ -53,6 +55,41 @@ public class LoyaltyUseCase {
 
 
             return loyaltyRepository.save(new LoyaltyCard(enterprise, clientRepo));
+        } catch (Exception e) {
+            throw new EnterpriseException("error : " + e.getMessage());
+        }
+    }
+
+    public LoyaltyCard updateLoyaltyCard(String AdminEmail, Long idClient) {
+        try {
+
+
+            Admin admin = adminRepository.findByEmail(AdminEmail)
+                    .orElseThrow(() -> new EnterpriseException("Admin not found"));
+            System.out.println("##### ADMIN #####");
+            System.out.println("admin = " + admin.getEmail());
+
+            Client client = clientRepository.findById(idClient)
+                    .orElseThrow(() -> new EnterpriseException("Client not found"));
+            System.out.println("##### CLIENT #####");
+            System.out.println("client = " + client.getEmail());
+
+            // Check if the client is already associated with a loyalty card
+
+            LoyaltyCard card = loyaltyRepository.findByEnterpriseAndClient(admin.getEnterprise(), client);
+
+            if (card == null) {
+                throw new EnterpriseException("Loyalty card not found");
+
+            }
+
+            int currentPoints = card.getPoints();
+
+            card.setPoints(currentPoints + 100);
+
+            return loyaltyRepository.save(card);
+
+//            return loyaltyRepository.save(new LoyaltyCard(adminRepo.getEnterprise(), clientRepo));
         } catch (Exception e) {
             throw new EnterpriseException("error : " + e.getMessage());
         }

@@ -36,6 +36,7 @@ public class AuthController {
             new UsernamePasswordAuthenticationToken(loginRequest.getEmail(), loginRequest.getPassword())
         );
 
+
         String jwt = jwtUtil.generateToken(loginRequest.getEmail());
 
         Cookie cookie = new Cookie("jwt", jwt);

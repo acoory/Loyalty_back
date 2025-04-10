@@ -30,4 +30,8 @@ public abstract class BaseModel {
     @Column(name = "updated_at")
     private Date updatedAt;
 
+    public void orElseThrow(Object loyaltyNotFound) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'orElseThrow'");
+    }
 }
