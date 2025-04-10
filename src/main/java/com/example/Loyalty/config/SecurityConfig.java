@@ -30,6 +30,7 @@ public class SecurityConfig {
                         .requestMatchers("/api/auth/login").permitAll()
                         .requestMatchers("/enterprise/**").permitAll()
                         .requestMatchers("/admin/create").permitAll()
+                        .requestMatchers("/client/create").permitAll()
                         .anyRequest().authenticated()
                 );
 

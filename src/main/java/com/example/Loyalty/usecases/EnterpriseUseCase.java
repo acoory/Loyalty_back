@@ -56,6 +56,15 @@ public class EnterpriseUseCase {
 //        }
 //    }
 
+    public Enterprise isEnterpriseExist(Long id) {
+        try {
+            return enterpriseRepository.findById(id)
+                    .orElseThrow(() -> new EnterpriseException("Enterprise not found"));
+        } catch (Exception e) {
+            throw new EnterpriseException("error : " + e.getMessage());
+        }
+    }
+
     public Enterprise createEnterprise(Enterprise newEnterprise) {
 
         try {
